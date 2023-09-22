@@ -1,11 +1,13 @@
+use serde::Serialize;
 use uom::si::f32::Volume;
 
-#[derive(Debug)]
+#[derive(Debug, Serialize)]
 pub struct Beverage {
-    pub name: String,
-    pub category: BeverageCategory,
+    pub id: String,
+    pub description: String,
     pub capacity: Volume,
     pub amount: f32,
+    pub metadata: BeverageMetadata,
 }
 
 impl Beverage {
@@ -14,9 +16,18 @@ impl Beverage {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub enum BeverageCategory {
+    Softdrink,
     Beer,
     Wine,
     Spirit,
+}
+
+#[derive(Debug, Serialize, Default)]
+pub struct BeverageMetadata {
+    pub category: Option<BeverageCategory>,
+    pub image_uri: Option<String>,
+    pub alc_percent: Option<f32>,
 }

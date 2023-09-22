@@ -1,3 +1,4 @@
 [workspace]
-members = ["lib", "cli"]
-default-members = ["cli"]
+members = ["lib", "rest"]
+default-members = ["rest"]
+resolver = "1"

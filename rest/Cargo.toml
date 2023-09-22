@@ -1,5 +1,5 @@
 [package]
-name = "minibar_cli"
+name = "minibar_rest"
 version = "0.1.0"
 edition = "2021"
 
@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 minibar = { path = "../lib" }
 uom = "0.35.0"
+actix-web = "4"
