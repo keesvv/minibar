@@ -2,6 +2,7 @@ use serde::Serialize;
 use uom::si::f32::Volume;
 
 #[derive(Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Beverage {
     pub id: String,
     pub description: String,
@@ -26,6 +27,7 @@ pub enum BeverageCategory {
 }
 
 #[derive(Debug, Serialize, Default)]
+#[serde(rename_all = "camelCase")]
 pub struct BeverageMetadata {
     pub category: Option<BeverageCategory>,
     pub image_uri: Option<String>,

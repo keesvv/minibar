@@ -9,3 +9,4 @@ edition = "2021"
 minibar = { path = "../lib" }
 uom = "0.35.0"
 actix-web = "4"
+actix-cors = "0.6.4"
