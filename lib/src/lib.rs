@@ -22,6 +22,13 @@ impl Beverage {
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 #[serde(rename_all = "camelCase")]
+pub enum BeveragePackaging {
+    Bottle,
+    Can,
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+#[serde(rename_all = "camelCase")]
 pub enum BeverageCategory {
     Softdrink,
     Beer,
@@ -30,15 +37,17 @@ pub enum BeverageCategory {
 }
 
 #[derive(Debug, Serialize, Deserialize, Default, Clone)]
-#[serde(rename_all = "camelCase")]
+#[serde(rename_all = "camelCase", default)]
 pub struct BeverageMetadata {
     pub category: Option<BeverageCategory>,
     pub image_uri: Option<String>,
     pub alc_percent: Option<f32>,
+    pub packaging: Option<BeveragePackaging>,
 }
 
 #[derive(Debug, Serialize, Deserialize, Default, Clone)]
 #[serde(rename_all = "camelCase", default)]
 pub struct BeverageCapabilities {
-    pub can_shot: bool,
+    pub is_unit: bool,
+    pub is_shottable: bool,
 }

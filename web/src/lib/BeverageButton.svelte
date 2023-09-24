@@ -8,7 +8,7 @@
 
 <Link
   to="/details/{beverage.id}"
-  class="beverage-tile bg-white dark:bg-gray-800 p-6 md:max-w-xs shadow-md rounded-md flex text-left items-center"
+  class="beverage-tile btn flex text-left items-center"
 >
   {#if beverage.metadata.imageUri}
     <img

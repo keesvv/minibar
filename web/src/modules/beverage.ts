@@ -13,10 +13,12 @@ export type BeverageMetadata = {
   category?: string;
   imageUri?: string;
   alcPercent?: number;
+  packaging?: string;
 };
 
 export type BeverageCapabilities = {
-  canShot: boolean;
+  isUnit: boolean;
+  isShottable: boolean;
 };
 
 export const stock = writable<Beverage[]>([]);

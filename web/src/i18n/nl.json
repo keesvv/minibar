@@ -5,6 +5,14 @@
       "beer": "Bier",
       "wine": "Wijn",
       "spirit": "Sterk"
+    },
+    "capability": {
+      "unit": "Stuk",
+      "shot": "Shot"
+    },
+    "packaging": {
+      "bottle": "Fles",
+      "can": "Blik"
     }
   }
 }
