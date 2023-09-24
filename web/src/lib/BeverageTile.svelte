@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { getCategoryName } from "../modules/beverage";
   import type { Beverage } from "../modules/beverage";
   import { _ } from "svelte-i18n";
+  import IconBeer from "~icons/line-md/beer-twotone-loop";
 
   export let beverage: Beverage;
 
@@ -22,7 +22,7 @@
   $: almostOut = remaining < beverage.capacity / 3;
 </script>
 
-<div class="beverage-tile p-6 md:max-w-xs shadow-md rounded-md flex">
+<div class="beverage-tile bg-white p-6 md:max-w-xs shadow-md rounded-md flex">
   {#if beverage.metadata.imageUri}
     <img
       class="h-full w-20 max-h-24 mr-5 object-contain"
@@ -36,8 +36,11 @@
       {#if details}
         <h2 class="text-md">{details}</h2>
       {/if}
-      <h2 class:text-red-500={almostOut}>
-        {(remaining * 1000).toLocaleString()}L
+      <h2 class="flex items-center">
+        <span class="mr-1" class:text-red-500={almostOut}>
+          <IconBeer />
+        </span>
+        <span>{(remaining * 1000).toLocaleString()}L</span>
       </h2>
     </div>
   </div>
