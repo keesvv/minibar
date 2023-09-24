@@ -48,6 +48,6 @@ pub struct BeverageMetadata {
 #[derive(Debug, Serialize, Deserialize, Default, Clone)]
 #[serde(rename_all = "camelCase", default)]
 pub struct BeverageCapabilities {
-    pub is_unit: bool,
-    pub is_shottable: bool,
+    pub unit: bool,
+    pub shot: bool,
 }

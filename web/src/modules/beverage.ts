@@ -17,8 +17,8 @@ export type BeverageMetadata = {
 };
 
 export type BeverageCapabilities = {
-  isUnit: boolean;
-  isShottable: boolean;
+  unit: boolean;
+  shot: boolean;
 };
 
 export const stock = writable<Beverage[]>([]);

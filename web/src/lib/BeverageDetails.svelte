@@ -34,7 +34,7 @@
         </span>
         <span>{(remaining * 1000).toLocaleString()}L</span>
       </div>
-      {#if beverage.capabilities.isShottable}
+      {#if beverage.capabilities.shot}
         <div class="remaining-shots flex items-center gap-1">
           <IconShot />
           <span>{Math.floor(shotsRemaining)}</span>
