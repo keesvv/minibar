@@ -5,6 +5,7 @@
   import { api } from "./modules/api";
   import { Route, Router } from "svelte-navigator";
   import Catalog from "./pages/Catalog.svelte";
+  import ViewBeverage from "./pages/ViewBeverage.svelte";
 
   onMount(async () => {
     config.set(await api("config").json());
@@ -14,6 +15,7 @@
 
 <div class="app p-10">
   <Router>
-    <Route path="/"><Catalog /></Route>
+    <Route path="/" component={Catalog} />
+    <Route path="/details/:id" component={ViewBeverage} />
   </Router>
 </div>
