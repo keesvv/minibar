@@ -11,7 +11,7 @@
   });
 </script>
 
-<section class="catalog grid grid-flow-col gap-3 p-10">
+<section class="catalog grid md:grid-flow-col gap-3 p-10">
   {#each beverages as beverage}
     <BeverageTile {beverage} />
   {/each}

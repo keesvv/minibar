@@ -1,0 +1,10 @@
+{
+  "beverage": {
+    "category": {
+      "softDrink": "Fris",
+      "beer": "Bier",
+      "wine": "Wijn",
+      "spirit": "Sterk"
+    }
+  }
+}

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { getCategoryName } from "../modules/beverage";
   import type { Beverage } from "../modules/beverage";
+  import { _ } from "svelte-i18n";
 
   export let beverage: Beverage;
 
@@ -9,7 +10,8 @@
 
   let details: string;
   $: details = [
-    beverage.metadata.category && getCategoryName(beverage),
+    beverage.metadata.category &&
+      $_(`beverage.category.${beverage.metadata.category}`),
     beverage.metadata.alcPercent &&
       `${(beverage.metadata.alcPercent * 100).toLocaleString()}%`,
   ]
@@ -20,21 +22,23 @@
   $: almostOut = remaining < beverage.capacity / 3;
 </script>
 
-<div class="beverage-tile p-8 max-w-xs shadow-md rounded-md">
+<div class="beverage-tile p-6 md:max-w-xs shadow-md rounded-md flex">
   {#if beverage.metadata.imageUri}
     <img
-      class="w-10 mx-auto mb-5"
+      class="h-full w-20 max-h-24 mr-5 object-contain"
       src={beverage.metadata.imageUri}
       alt={beverage.description}
     />
   {/if}
-  <h1 class="text-xl">{beverage.description}</h1>
-  <div class="flex justify-between text-gray-400">
-    {#if details}
-      <h2 class="text-md">{details}</h2>
-    {/if}
-    <h2 class:text-red-500={almostOut}>
-      {(remaining * 1000).toLocaleString()}L
-    </h2>
+  <div>
+    <h1 class="text-xl">{beverage.description}</h1>
+    <div class="text-gray-400">
+      {#if details}
+        <h2 class="text-md">{details}</h2>
+      {/if}
+      <h2 class:text-red-500={almostOut}>
+        {(remaining * 1000).toLocaleString()}L
+      </h2>
+    </div>
   </div>
 </div>
