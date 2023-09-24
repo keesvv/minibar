@@ -4,10 +4,15 @@ export type Beverage = {
   capacity: number;
   amount: number;
   metadata: BeverageMetadata;
+  capabilities: BeverageCapabilities;
 };
 
 export type BeverageMetadata = {
   category?: string;
   imageUri?: string;
   alcPercent?: number;
+};
+
+export type BeverageCapabilities = {
+  canShot: boolean;
 };

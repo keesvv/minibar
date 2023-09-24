@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@iconify-json/line-md": "^1.1.29",
+    "@iconify-json/mdi": "^1.1.54",
     "ky": "^1.0.1",
     "svelte-i18n": "^3.7.4"
   }

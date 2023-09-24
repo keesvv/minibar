@@ -1,7 +1,7 @@
 use std::{io, net::Ipv4Addr};
 
 use minibar::Beverage;
-use minibar_rest::{routes, State};
+use minibar_rest::{routes, Config, State};
 
 use actix_cors::Cors;
 use actix_web::{
@@ -16,10 +16,12 @@ async fn main() {
     HttpServer::new(move || {
         App::new()
             .app_data(Data::new(State {
+                config: Config::default(),
                 beverages: beverages.clone(),
             }))
             .wrap(Cors::permissive())
             .route("/beverages", get().to(routes::get_beverages))
+            .route("/config", get().to(routes::get_config))
     })
     .bind((Ipv4Addr::LOCALHOST, 8080))
     .unwrap()

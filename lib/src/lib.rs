@@ -8,7 +8,10 @@ pub struct Beverage {
     pub description: String,
     pub capacity: Volume,
     pub amount: f32,
+    #[serde(default)]
     pub metadata: BeverageMetadata,
+    #[serde(default)]
+    pub capabilities: BeverageCapabilities,
 }
 
 impl Beverage {
@@ -32,4 +35,10 @@ pub struct BeverageMetadata {
     pub category: Option<BeverageCategory>,
     pub image_uri: Option<String>,
     pub alc_percent: Option<f32>,
+}
+
+#[derive(Debug, Serialize, Deserialize, Default, Clone)]
+#[serde(rename_all = "camelCase", default)]
+pub struct BeverageCapabilities {
+    pub can_shot: bool,
 }
