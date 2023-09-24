@@ -1,13 +1,13 @@
 <script lang="ts">
-  import ky from "ky";
   import { onMount } from "svelte";
   import type { Beverage } from "./modules/beverage";
+  import { api } from "./modules/api";
   import BeverageTile from "./lib/BeverageTile.svelte";
 
   let beverages: Beverage[] = [];
 
   onMount(async () => {
-    beverages = await ky.get("//localhost:1337/api/beverages").json();
+    beverages = await api("beverages").json();
   });
 </script>
 
