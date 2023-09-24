@@ -1,3 +1,5 @@
+import { writable } from "svelte/store";
+
 export type Beverage = {
   id: string;
   description: string;
@@ -16,3 +18,5 @@ export type BeverageMetadata = {
 export type BeverageCapabilities = {
   canShot: boolean;
 };
+
+export const stock = writable<Beverage[]>([]);
