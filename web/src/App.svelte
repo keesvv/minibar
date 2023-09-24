@@ -7,7 +7,7 @@
   let beverages: Beverage[] = [];
 
   onMount(async () => {
-    beverages = await ky.get("//localhost:8080/beverages").json();
+    beverages = await ky.get("//localhost:1337/api/beverages").json();
   });
 </script>
 

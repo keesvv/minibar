@@ -1,13 +1,23 @@
-use actix_cors::Cors;
-use minibar_rest::routes;
-use std::net::Ipv4Addr;
+use std::{io, net::Ipv4Addr};
 
-use actix_web::{web, App, HttpServer};
+use minibar::Beverage;
+use minibar_rest::{routes, State};
+
+use actix_cors::Cors;
+use actix_web::{
+    web::{self, Data},
+    App, HttpServer,
+};
 
 #[actix_web::main]
 async fn main() {
-    HttpServer::new(|| {
+    let beverages: Vec<Beverage> = serde_json::from_reader(io::stdin()).unwrap();
+
+    HttpServer::new(move || {
         App::new()
+            .app_data(Data::new(State {
+                beverages: beverages.clone(),
+            }))
             .wrap(Cors::permissive())
             .route("/beverages", web::get().to(routes::get_beverages))
     })

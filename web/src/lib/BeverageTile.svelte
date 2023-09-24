@@ -20,10 +20,10 @@
   $: almostOut = remaining < beverage.capacity / 3;
 </script>
 
-<div class="beverage-tile p-8 shadow-md rounded-md">
+<div class="beverage-tile p-8 max-w-xs shadow-md rounded-md">
   {#if beverage.metadata.imageUri}
     <img
-      class="w-16"
+      class="w-10 mx-auto mb-5"
       src={beverage.metadata.imageUri}
       alt={beverage.description}
     />
