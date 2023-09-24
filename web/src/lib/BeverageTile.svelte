@@ -21,7 +21,9 @@
   let almostOut = remaining < beverage.capacity / 3;
 </script>
 
-<div class="beverage-tile bg-white p-6 md:max-w-xs shadow-md rounded-md flex">
+<div
+  class="beverage-tile bg-white dark:bg-gray-800 p-6 md:max-w-xs shadow-md rounded-md flex"
+>
   {#if beverage.metadata.imageUri}
     <img
       class="h-full w-20 max-h-24 mr-5 object-contain"
