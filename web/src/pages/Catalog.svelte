@@ -4,10 +4,14 @@
   import { Link } from "svelte-navigator";
   import IconWater from "~icons/mdi/water";
   import { _ } from "svelte-i18n";
+  import { addToOrder } from "../modules/order";
 </script>
 
 <section class="catalog grid md:grid-flow-col gap-3">
-  <button class="btn-alt flex gap-2 items-center">
+  <button
+    class="btn-alt flex gap-2 items-center"
+    on:click={() => addToOrder({ type: "water" })}
+  >
     <IconWater />
     <span>{$_("water")}</span>
   </button>

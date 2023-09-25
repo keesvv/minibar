@@ -5,6 +5,7 @@
   import BeverageDetails from "../lib/BeverageDetails.svelte";
   import BeverageButton from "../lib/BeverageButton.svelte";
   import { P, match } from "ts-pattern";
+  import { addToOrder } from "../modules/order";
 
   const params = useParams();
 
@@ -55,7 +56,13 @@
   {#if beverage?.capabilities.includes("mix")}
     <div class="mixWith mt-3 grid gap-3">
       {#each softdrinks as softdrink}
-        <button>
+        <button
+          on:click={() =>
+            addToOrder({
+              type: "mix",
+              beverageIds: [beverage?.id, softdrink.id],
+            })}
+        >
           <BeverageButton beverage={softdrink} />
         </button>
       {/each}
