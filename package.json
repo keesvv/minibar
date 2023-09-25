@@ -2,7 +2,7 @@
   "name": "minibar",
   "type": "module",
   "scripts": {
-    "dev-web": "bun run --cwd web dev"
+    "dev:web": "bun run --cwd web dev"
   },
   "workspaces": [
     "web"

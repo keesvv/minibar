@@ -1,9 +1,8 @@
 <script lang="ts">
-  import type { Beverage } from "../modules/beverage";
+  import { IconShot, type Beverage } from "../modules/beverage";
   import { _ } from "svelte-i18n";
   import { config } from "../modules/config";
   import IconBeer from "~icons/line-md/beer-twotone-loop";
-  import IconShot from "~icons/mdi/water";
 
   export let beverage: Beverage;
 

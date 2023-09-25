@@ -1,10 +1,11 @@
 <script lang="ts">
   import { useParams } from "svelte-navigator";
   import { _ } from "svelte-i18n";
-  import { stock } from "../modules/beverage";
+  import { stock, IconShot, IconBottle } from "../modules/beverage";
   import BeverageDetails from "../lib/BeverageDetails.svelte";
-  import IconAdd from "~icons/mdi/plus";
   import BeverageButton from "../lib/BeverageButton.svelte";
+  import type { SvelteComponent } from "svelte";
+  import { P, match } from "ts-pattern";
 
   const params = useParams();
 
@@ -14,6 +15,26 @@
   let shownCapabilities = beverage.capabilities.filter((c) =>
     ["unit", "shot"].includes(c)
   );
+
+  let capabilityMeta = shownCapabilities.map((cap) => {
+    let caption = match([beverage, cap])
+      .with(
+        [{ metadata: { packaging: P.string.and(P.select()) } }, "unit"],
+        (pkg) => $_(`beverage.packaging.${pkg}`)
+      )
+      .otherwise(() => $_(`beverage.capability.${cap}`));
+
+    let icon = match([beverage, cap])
+      .with([P._, "shot"], () => IconShot)
+      .with([{ metadata: { packaging: "bottle" } }, P._], () => IconBottle)
+      .otherwise(() => null);
+
+    return {
+      id: cap,
+      caption,
+      icon,
+    };
+  });
 </script>
 
 <section class="beverage-details">
@@ -21,14 +42,12 @@
     <BeverageDetails {beverage} />
   </div>
   <div class="capabilities grid gap-3">
-    {#each shownCapabilities as capability}
+    {#each capabilityMeta as capability}
       <button class="btn flex gap-2 items-center">
-        <IconAdd />
-        {#if capability === "unit" && beverage.metadata.packaging}
-          {$_(`beverage.packaging.${beverage.metadata.packaging}`)}
-        {:else}
-          {$_(`beverage.capability.${capability}`)}
+        {#if capability.icon}
+          <svelte:component this={capability.icon} />
         {/if}
+        <span>{capability.caption}</span>
       </button>
     {/each}
   </div>

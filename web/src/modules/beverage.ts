@@ -13,9 +13,14 @@ export type BeverageMetadata = {
   category?: string;
   imageUri?: string;
   alcPercent?: number;
-  packaging?: string;
+  packaging?: BeveragePackaging;
 };
+
+export type BeveragePackaging = "bottle" | "can";
 
 export type BeverageCapability = "unit" | "shot" | "mix";
 
 export const stock = writable<Beverage[]>([]);
+
+export { default as IconShot } from "~icons/mdi/water";
+export { default as IconBottle } from "~icons/mdi/bottle-soda";

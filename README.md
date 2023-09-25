@@ -10,7 +10,7 @@ cargo run
 
 Frontend
 ```bash
-bun dev-web
+bun dev:web
 ```
 
 ## Author
