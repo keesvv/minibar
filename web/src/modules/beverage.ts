@@ -16,6 +16,6 @@ export type BeverageMetadata = {
   packaging?: string;
 };
 
-export type BeverageCapability = "unit" | "shot";
+export type BeverageCapability = "unit" | "shot" | "mix";
 
 export const stock = writable<Beverage[]>([]);

@@ -8,7 +8,8 @@
     },
     "capability": {
       "unit": "Stuk",
-      "shot": "Shot"
+      "shot": "Shot",
+      "mix": "Mix"
     },
     "packaging": {
       "bottle": "Fles",

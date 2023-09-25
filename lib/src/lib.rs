@@ -50,4 +50,5 @@ pub struct BeverageMetadata {
 pub enum BeverageCapability {
     Unit,
     Shot,
+    Mix,
 }
