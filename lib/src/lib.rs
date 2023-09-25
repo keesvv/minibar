@@ -11,7 +11,7 @@ pub struct Beverage {
     #[serde(default)]
     pub metadata: BeverageMetadata,
     #[serde(default)]
-    pub capabilities: BeverageCapabilities,
+    pub capabilities: Vec<BeverageCapability>,
 }
 
 impl Beverage {
@@ -45,9 +45,9 @@ pub struct BeverageMetadata {
     pub packaging: Option<BeveragePackaging>,
 }
 
-#[derive(Debug, Serialize, Deserialize, Default, Clone)]
-#[serde(rename_all = "camelCase", default)]
-pub struct BeverageCapabilities {
-    pub unit: bool,
-    pub shot: bool,
+#[derive(Debug, Serialize, Deserialize, Clone)]
+#[serde(rename_all = "camelCase")]
+pub enum BeverageCapability {
+    Unit,
+    Shot,
 }

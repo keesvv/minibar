@@ -8,10 +8,6 @@
   const params = useParams();
 
   let beverage = $stock.find((b) => b.id === $params.id);
-
-  let capabilities = Object.entries(beverage.capabilities)
-    .filter(([, enabled]) => enabled)
-    .map(([id]) => id);
 </script>
 
 <section class="beverage-details">
@@ -19,7 +15,7 @@
     <BeverageDetails {beverage} />
   </div>
   <div class="capabilities grid">
-    {#each capabilities as capability}
+    {#each beverage.capabilities as capability}
       <button class="btn flex gap-2 items-center">
         <IconAdd />
         {#if capability === "unit" && beverage.metadata.packaging}

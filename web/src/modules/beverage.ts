@@ -6,7 +6,7 @@ export type Beverage = {
   capacity: number;
   amount: number;
   metadata: BeverageMetadata;
-  capabilities: BeverageCapabilities;
+  capabilities: BeverageCapability[];
 };
 
 export type BeverageMetadata = {
@@ -16,9 +16,6 @@ export type BeverageMetadata = {
   packaging?: string;
 };
 
-export type BeverageCapabilities = {
-  unit: boolean;
-  shot: boolean;
-};
+export type BeverageCapability = "unit" | "shot";
 
 export const stock = writable<Beverage[]>([]);
