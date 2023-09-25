@@ -6,4 +6,8 @@
   .btn {
     @apply bg-white dark:bg-gray-800 p-6 md:max-w-xs shadow-md rounded-md;
   }
+
+  .btn-alt {
+    @apply btn bg-gray-100 dark:bg-gray-900;
+  }
 }
