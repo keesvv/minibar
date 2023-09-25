@@ -5,7 +5,7 @@
   import BeverageDetails from "../lib/BeverageDetails.svelte";
   import BeverageButton from "../lib/BeverageButton.svelte";
   import { P, match } from "ts-pattern";
-  import { addToOrder } from "../modules/order";
+  import { addToOrder, canOrder } from "../modules/order";
 
   const params = useParams();
 
@@ -57,6 +57,8 @@
     <div class="mixWith mt-3 grid gap-3">
       {#each softdrinks as softdrink}
         <button
+          disabled={!canOrder}
+          class:btn-disabled={!canOrder}
           on:click={() =>
             addToOrder({
               type: "mix",

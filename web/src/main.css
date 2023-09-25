@@ -10,4 +10,8 @@
   .btn-alt {
     @apply btn bg-gray-100 dark:bg-gray-900;
   }
+
+  .btn-disabled {
+    @apply opacity-50;
+  }
 }

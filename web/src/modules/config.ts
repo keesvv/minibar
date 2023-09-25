@@ -2,6 +2,7 @@ import { writable } from "svelte/store";
 
 export type Config = {
   size: SizeConfig;
+  maxOrderSize: number;
 };
 
 export type SizeConfig = {

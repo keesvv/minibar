@@ -1,5 +1,6 @@
-import { writable } from "svelte/store";
+import { derived, writable } from "svelte/store";
 import type { Beverage } from "./beverage";
+import { config } from "./config";
 
 export type Order = OrderItem[];
 
@@ -9,6 +10,10 @@ export type OrderItem =
   | { type: "mix"; beverageIds: Beverage["id"][] };
 
 export const order = writable<Order>([]);
+export const canOrder = derived(
+  [order, config],
+  ([$order, $config]) => $order.length < $config.maxOrderSize
+);
 
 export function addToOrder(item: OrderItem) {
   order.update((ord) => [...ord, item]);

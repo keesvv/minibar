@@ -6,12 +6,24 @@ use uom::si::volume::centiliter;
 
 pub mod routes;
 
-#[derive(Debug, Clone, Serialize, Default)]
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Config {
     pub size: SizeConfig,
+    pub max_order_size: i32,
+}
+
+impl Default for Config {
+    fn default() -> Self {
+        Self {
+            size: Default::default(),
+            max_order_size: 3,
+        }
+    }
 }
 
 #[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct SizeConfig {
     pub shot: Volume,
 }
