@@ -1,5 +1,8 @@
 import { writable } from "svelte/store";
 
+export { default as IconShot } from "~icons/mdi/water";
+export { default as IconBottle } from "~icons/mdi/bottle-soda";
+
 export type Beverage = {
   id: string;
   description: string;
@@ -22,5 +25,6 @@ export type BeverageCapability = "unit" | "shot" | "mix";
 
 export const stock = writable<Beverage[]>([]);
 
-export { default as IconShot } from "~icons/mdi/water";
-export { default as IconBottle } from "~icons/mdi/bottle-soda";
+export function findById(stock: Beverage[], itemId: Beverage["id"]): Beverage {
+  return stock.find((s) => s.id === itemId);
+}

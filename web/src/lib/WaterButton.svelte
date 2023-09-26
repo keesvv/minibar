@@ -9,7 +9,6 @@
 <button
   class="btn-alt flex gap-2 items-center"
   disabled={!canAdd || !$canOrder}
-  class:btn-disabled={!canAdd || !$canOrder}
   on:click={() => addToOrder({ type: "water" })}
 >
   <IconWater />

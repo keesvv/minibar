@@ -9,7 +9,6 @@
 
 <button
   disabled={!$canOrder}
-  class:btn-disabled={!$canOrder}
   class="mix-button btn text-left"
   on:click={() =>
     addToOrder({

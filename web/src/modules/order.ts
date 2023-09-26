@@ -7,7 +7,9 @@ export type Order = OrderItem[];
 export type OrderItem =
   | { type: "water" }
   | { type: "beverage"; beverageId: Beverage["id"] }
-  | { type: "mix"; beverageIds: Beverage["id"][] };
+  | { type: "mix"; beverageIds: Beverage["id"][] }
+  | { type: "shot"; beverageId: Beverage["id"] }
+  | { type: "unit"; beverageId: Beverage["id"] };
 
 export const order = writable<Order>([]);
 export const canOrder = derived(
