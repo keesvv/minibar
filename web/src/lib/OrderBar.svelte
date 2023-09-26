@@ -18,7 +18,7 @@
 </script>
 
 <div
-  class="order-bar bg-blue-500 p-6 rounded-t-md flex gap-2 justify-between items-center"
+  class="order-bar text-white bg-blue-400 dark:bg-blue-500 p-6 rounded-t-md flex gap-2 justify-between items-center"
 >
   <span>{orderSummary.join(", ")}</span>
   <button class="btn-order" on:click={() => placeOrder()}>

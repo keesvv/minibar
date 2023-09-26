@@ -12,7 +12,8 @@ export type OrderItem =
 export const order = writable<Order>([]);
 export const canOrder = derived(
   [order, config],
-  ([$order, $config]) => $order.length < $config.maxOrderSize
+  ([$order, $config]) => $order.length < $config?.maxOrderSize,
+  true
 );
 
 export function addToOrder(item: OrderItem) {

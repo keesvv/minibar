@@ -3,9 +3,8 @@
   import { _ } from "svelte-i18n";
   import { stock, IconShot, IconBottle } from "../modules/beverage";
   import BeverageDetails from "../lib/BeverageDetails.svelte";
-  import BeverageButton from "../lib/BeverageButton.svelte";
   import { P, match } from "ts-pattern";
-  import { addToOrder, canOrder } from "../modules/order";
+  import MixButton from "../lib/MixButton.svelte";
 
   const params = useParams();
 
@@ -56,17 +55,7 @@
   {#if beverage?.capabilities.includes("mix")}
     <div class="mixWith mt-3 grid gap-3">
       {#each softdrinks as softdrink}
-        <button
-          disabled={!canOrder}
-          class:btn-disabled={!canOrder}
-          on:click={() =>
-            addToOrder({
-              type: "mix",
-              beverageIds: [beverage?.id, softdrink.id],
-            })}
-        >
-          <BeverageButton beverage={softdrink} />
-        </button>
+        <MixButton {beverage} {softdrink} />
       {/each}
     </div>
   {/if}

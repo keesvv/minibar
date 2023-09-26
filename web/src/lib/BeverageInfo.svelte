@@ -5,7 +5,7 @@
   export let beverage: Beverage;
 </script>
 
-<div class="beverage-button btn flex text-left items-center">
+<div class="beverage-info flex items-center">
   {#if beverage.metadata.imageUri}
     <img
       class="h-full w-20 max-h-24 mr-5 object-contain"
