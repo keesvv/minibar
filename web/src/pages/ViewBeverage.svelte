@@ -1,7 +1,7 @@
 <script lang="ts">
   import { useParams } from "svelte-navigator";
   import { _ } from "svelte-i18n";
-  import { stock } from "../modules/beverage";
+  import { stock } from "../modules/stock";
   import BeverageDetails from "../lib/BeverageDetails.svelte";
   import MixButton from "../lib/MixButton.svelte";
   import CapabilityButton from "../lib/CapabilityButton.svelte";

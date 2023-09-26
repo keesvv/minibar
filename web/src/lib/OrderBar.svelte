@@ -3,7 +3,7 @@
   import { order, placeOrder } from "../modules/order";
   import IconOrder from "~icons/mdi/send";
   import { _ } from "svelte-i18n";
-  import { stock, findById } from "../modules/beverage";
+  import { stock, findById } from "../modules/stock";
 
   $: orderSummary = $order.map((ord) =>
     match(ord)

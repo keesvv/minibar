@@ -1,7 +1,7 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import { Link } from "svelte-navigator";
-  import { stock } from "../modules/beverage";
+  import { stock } from "../modules/stock";
   import BeverageInfo from "../lib/BeverageInfo.svelte";
   import WaterButton from "../lib/WaterButton.svelte";
 </script>

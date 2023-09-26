@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { stock } from "./modules/beverage";
+  import { stock } from "./modules/stock";
   import { config } from "./modules/config";
   import { api } from "./modules/api";
   import { order } from "./modules/order";
@@ -17,8 +17,8 @@
 
 <div class="app p-10">
   <Router primary={false}>
-    <Route path="/" component={Catalog} />
-    <Route path="/details/:id" component={ViewBeverage} />
+    <Route path="/"><Catalog /></Route>
+    <Route path="/details/:id"><ViewBeverage /></Route>
   </Router>
   {#if $order.length}
     <div class="order-bar-container absolute left-0 bottom-0 right-0">
