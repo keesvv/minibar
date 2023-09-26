@@ -1,6 +1,7 @@
-import { derived, writable } from "svelte/store";
+import { derived, get, writable } from "svelte/store";
 import type { Beverage } from "./beverage";
 import { config } from "./config";
+import { api } from "./api";
 
 export type Order = OrderItem[];
 
@@ -24,5 +25,6 @@ export function addToOrder(item: OrderItem) {
 
 export function placeOrder() {
   navigator.vibrate?.([50, 50]);
+  api.post("orders", { json: get(order) });
   order.set([]);
 }

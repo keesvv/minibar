@@ -1,10 +1,14 @@
+pub mod order;
+
 use serde::{Deserialize, Serialize};
 use uom::si::f32::Volume;
+
+pub type BeverageId = String;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Beverage {
-    pub id: String,
+    pub id: BeverageId,
     pub description: String,
     pub capacity: Volume,
     pub amount: f32,

@@ -5,7 +5,7 @@ use minibar_rest::{routes, Config, State};
 
 use actix_cors::Cors;
 use actix_web::{
-    web::{get, Data},
+    web::{get, post, Data},
     App, HttpServer,
 };
 
@@ -22,6 +22,7 @@ async fn main() {
             .wrap(Cors::permissive())
             .route("/beverages", get().to(routes::get_beverages))
             .route("/config", get().to(routes::get_config))
+            .route("/orders", post().to(routes::order))
     })
     .bind((Ipv4Addr::LOCALHOST, 8080))
     .unwrap()
