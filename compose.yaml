@@ -1,0 +1,29 @@
+version: "2"
+
+services:
+  # web:
+  #   image: minibar/web
+  #   build:
+  #     context: .
+  #     dockerfile: web/Containerfile.dev
+  #   environment:
+  #     VITE_API_ENDPOINT: /api
+  #   ports:
+  #     - 5173:5173
+
+  rest:
+    image: minibar/rest
+    build:
+      context: .
+      dockerfile: rest/Containerfile.dev
+    environment:
+      WEBHOOK_URL: http://ntfy:1338
+
+  proxy:
+    image: caddy:2.7
+    volumes:
+      - ./compose/Caddyfile:/etc/caddy/Caddyfile:ro
+    depends_on:
+      - rest
+    ports:
+      - 1337:1337

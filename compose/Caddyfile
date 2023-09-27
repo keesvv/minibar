@@ -1,0 +1,16 @@
+:1337
+
+root * /srv
+
+# route {
+# 	reverse_proxy web:5173
+# }
+
+route /api* {
+	uri strip_prefix /api
+	reverse_proxy rest:8080
+}
+
+handle_path /static* {
+	file_server browse
+}

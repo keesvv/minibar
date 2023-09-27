@@ -1,6 +1,0 @@
-# Cargo
-/target
-/Cargo.lock
-
-# Bun
-/node_modules

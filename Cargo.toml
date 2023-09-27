@@ -1,4 +1,0 @@
-[workspace]
-members = ["lib", "rest", "ntfy"]
-default-members = ["rest"]
-resolver = "1"

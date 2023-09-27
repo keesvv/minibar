@@ -3,14 +3,18 @@
 Small drink management companion for party people.
 
 ## Development
-Server
+**Docker**
+
+Still working on it!
+
+**Server**
 ```bash
-cargo run
+cd rest && cargo run < catalog.json
 ```
 
-Frontend
+**Frontend**
 ```bash
-bun dev:web
+cd web && bun dev
 ```
 
 ## Author
