@@ -4,8 +4,6 @@ use serde::Serialize;
 use uom::si::f32::Volume;
 use uom::si::volume::centiliter;
 
-pub mod routes;
-
 #[derive(Debug, Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Config {

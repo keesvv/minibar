@@ -2,13 +2,15 @@ use std::env;
 use std::{io, net::Ipv4Addr};
 
 use minibar::Beverage;
-use minibar_rest::{routes, Config, State};
+use minibar_rest::{Config, State};
 
 use actix_cors::Cors;
 use actix_web::{
     web::{get, post, Data},
     App, HttpServer,
 };
+
+mod routes;
 
 #[actix_web::main]
 async fn main() {
