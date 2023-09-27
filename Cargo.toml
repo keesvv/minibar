@@ -1,4 +1,4 @@
 [workspace]
-members = ["lib", "rest"]
+members = ["lib", "rest", "ntfy"]
 default-members = ["rest"]
 resolver = "1"

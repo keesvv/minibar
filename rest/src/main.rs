@@ -1,3 +1,4 @@
+use std::env;
 use std::{io, net::Ipv4Addr};
 
 use minibar::Beverage;
@@ -11,6 +12,7 @@ use actix_web::{
 
 #[actix_web::main]
 async fn main() {
+    let webhook_url = env::var("WEBHOOK_URL").ok();
     let beverages: Vec<Beverage> = serde_json::from_reader(io::stdin()).unwrap();
 
     HttpServer::new(move || {
@@ -18,6 +20,7 @@ async fn main() {
             .app_data(Data::new(State {
                 config: Config::default(),
                 beverages: beverages.clone(),
+                webhook_url: webhook_url.clone(),
             }))
             .wrap(Cors::permissive())
             .route("/beverages", get().to(routes::get_beverages))

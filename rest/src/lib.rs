@@ -40,4 +40,5 @@ impl Default for SizeConfig {
 pub struct State {
     pub config: Config,
     pub beverages: Vec<Beverage>,
+    pub webhook_url: Option<String>,
 }
