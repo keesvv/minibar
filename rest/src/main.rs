@@ -1,6 +1,7 @@
 use std::env;
 use std::{io, net::Ipv4Addr};
 
+use actix_web_httpauth::middleware::HttpAuthentication;
 use minibar::Beverage;
 use minibar_rest::{Config, State};
 
@@ -10,6 +11,7 @@ use actix_web::{
     App, HttpServer,
 };
 
+mod middleware;
 mod routes;
 
 #[actix_web::main]
@@ -25,8 +27,10 @@ async fn main() {
                 webhook_url: webhook_url.clone(),
             }))
             .wrap(Cors::permissive())
-            .route("/beverages", get().to(routes::get_beverages))
+            .wrap(HttpAuthentication::bearer(middleware::authenticate))
             .route("/config", get().to(routes::get_config))
+            .route("/auth", get().to(routes::get_auth))
+            .route("/beverages", get().to(routes::get_beverages))
             .route("/orders", post().to(routes::order))
     })
     .bind((Ipv4Addr::LOCALHOST, 8080))
