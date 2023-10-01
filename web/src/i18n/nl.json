@@ -1,6 +1,7 @@
 {
   "water": "Water",
   "beverage": {
+    "unknown": "Onbekend",
     "category": {
       "softdrink": "Fris",
       "beer": "Bier",

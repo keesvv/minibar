@@ -22,6 +22,14 @@
       config.set(await api("config").json());
       stock.set(await api("beverages").json());
     });
+
+    if (localStorage.getItem("order") != null) {
+      order.set(JSON.parse(localStorage.getItem("order")));
+    }
+
+    order.subscribe((orderUpdate) => {
+      localStorage.setItem("order", JSON.stringify(orderUpdate));
+    });
   });
 </script>
 

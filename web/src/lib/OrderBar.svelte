@@ -5,23 +5,39 @@
   import { _ } from "svelte-i18n";
   import { stock, findById } from "../modules/stock";
   import { session } from "../modules/auth";
+  import type { Beverage } from "../modules/beverage";
+
+  function findFallback(stock: Beverage[], itemId: Beverage["id"]): Beverage {
+    return (
+      findById(stock, itemId) ?? {
+        id: itemId,
+        description: $_("beverage.unknown"),
+        capacity: 0,
+        amount: 0,
+        metadata: {},
+        capabilities: [],
+      }
+    );
+  }
 
   $: orderSummary = $order.map((ord) =>
     match(ord)
       .with({ type: "water" }, () => $_("water"))
       .with({ type: "mix" }, (item) =>
-        item.beverageIds.map((id) => findById($stock, id).description).join(" ")
+        item.beverageIds
+          .map((id) => findFallback($stock, id).description)
+          .join(" ")
       )
       .with(
         { type: "shot", beverageId: P.select() },
         (id) =>
-          `${findById($stock, id).description} ${$_(
+          `${findFallback($stock, id).description} ${$_(
             "beverage.capability.shot"
           )}`
       )
       .with(
         { type: "unit", beverageId: P.select() },
-        (id) => findById($stock, id).description
+        (id) => findFallback($stock, id).description
       )
       .run()
   );
