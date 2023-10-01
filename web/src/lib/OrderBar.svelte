@@ -59,7 +59,8 @@
   }
 
   function clearOrder() {
-    order.set([]);
+    clearMode = true;
+    setTimeout(() => order.set([]), 500);
   }
 </script>
 
@@ -71,10 +72,8 @@
   <button
     class="btn-order p-1 disabled:opacity-50"
     disabled={pending || !$session}
-    use:press={{ timeframe: 750, triggerBeforeFinished: true }}
+    use:press={{ timeframe: 750 }}
     on:press={() => clearOrder()}
-    on:pressdown={() => (clearMode = true)}
-    on:pressup={() => (clearMode = false)}
     on:click={() => sendOrder()}
   >
     {#if clearMode}
