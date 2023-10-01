@@ -1,11 +1,13 @@
 <script lang="ts">
   import { P, match } from "ts-pattern";
   import { order, placeOrder } from "../modules/order";
-  import IconOrder from "~icons/mdi/send";
-  import { _ } from "svelte-i18n";
   import { stock, findById } from "../modules/stock";
   import { session } from "../modules/auth";
   import type { Beverage } from "../modules/beverage";
+  import { _ } from "svelte-i18n";
+  import { press } from "svelte-gestures";
+  import IconOrder from "~icons/mdi/send";
+  import IconClear from "~icons/mdi/trash";
 
   function findFallback(stock: Beverage[], itemId: Beverage["id"]): Beverage {
     return (
@@ -43,6 +45,7 @@
   );
 
   let pending = false;
+  let clearMode = false;
 
   function sendOrder() {
     pending = true;
@@ -54,17 +57,36 @@
       })
       .finally(() => (pending = false));
   }
+
+  function clearOrder() {
+    order.set([]);
+  }
 </script>
 
 <div
   class="order-bar text-white bg-blue-400 dark:bg-blue-500 p-5 rounded-t-md flex gap-2 justify-between items-center"
+  class:clear-mode={clearMode}
 >
   <span>{orderSummary.join(", ")}</span>
   <button
     class="btn-order p-1 disabled:opacity-50"
     disabled={pending || !$session}
+    use:press={{ timeframe: 750, triggerBeforeFinished: true }}
+    on:press={() => clearOrder()}
+    on:pressdown={() => (clearMode = true)}
+    on:pressup={() => (clearMode = false)}
     on:click={() => sendOrder()}
   >
-    <IconOrder class="text-2xl" />
+    {#if clearMode}
+      <IconClear class="text-2xl" />
+    {:else}
+      <IconOrder class="text-2xl" />
+    {/if}
   </button>
 </div>
+
+<style scoped lang="postcss">
+  .clear-mode {
+    @apply bg-red-400 dark:bg-red-500;
+  }
+</style>
