@@ -16,5 +16,11 @@
       "bottle": "Fles",
       "can": "Blik"
     }
+  },
+  "login": {
+    "caption": "Mag ik weten wie je bent?",
+    "inputs": {
+      "firstName": "Voornaam"
+    }
   }
 }

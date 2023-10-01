@@ -35,10 +35,10 @@ async fn main() {
                 CookieSessionStore::default(),
                 secret_key.clone(),
             ))
-            .route("/", post().to(routes::login))
-            .route("/", delete().to(routes::logout))
-            .route("/config", get().to(routes::get_config))
+            .route("/auth", post().to(routes::login))
+            .route("/auth", delete().to(routes::logout))
             .route("/auth", get().to(routes::get_auth))
+            .route("/config", get().to(routes::get_config))
             .route("/beverages", get().to(routes::get_beverages))
             .route("/orders", post().to(routes::order))
     })
