@@ -22,8 +22,6 @@ export function addToOrder(item: OrderItem) {
   order.update((ord) => [...ord, item]);
 }
 
-export function placeOrder() {
-  navigator.vibrate?.([50, 50]);
-  api.post("orders", { json: get(order) });
-  order.set([]);
+export async function placeOrder(order: Order) {
+  return api.post("orders", { json: order });
 }

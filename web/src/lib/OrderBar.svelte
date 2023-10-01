@@ -4,6 +4,7 @@
   import IconOrder from "~icons/mdi/send";
   import { _ } from "svelte-i18n";
   import { stock, findById } from "../modules/stock";
+  import { session } from "../modules/auth";
 
   $: orderSummary = $order.map((ord) =>
     match(ord)
@@ -24,13 +25,30 @@
       )
       .run()
   );
+
+  let pending = false;
+
+  function sendOrder() {
+    pending = true;
+
+    placeOrder($order)
+      .then(() => {
+        navigator.vibrate?.([50, 50]);
+        order.set([]);
+      })
+      .finally(() => (pending = false));
+  }
 </script>
 
 <div
   class="order-bar text-white bg-blue-400 dark:bg-blue-500 p-5 rounded-t-md flex gap-2 justify-between items-center"
 >
   <span>{orderSummary.join(", ")}</span>
-  <button class="btn-order p-1" on:click={() => placeOrder()}>
+  <button
+    class="btn-order p-1 disabled:opacity-50"
+    disabled={pending || !$session}
+    on:click={() => sendOrder()}
+  >
     <IconOrder class="text-2xl" />
   </button>
 </div>
