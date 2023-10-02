@@ -72,7 +72,7 @@
   <button
     class="btn-order p-1 disabled:opacity-50"
     disabled={pending || !$session}
-    use:press={{ timeframe: 750 }}
+    use:press={{ timeframe: 750, triggerBeforeFinished: true }}
     on:press={() => clearOrder()}
     on:click={() => sendOrder()}
   >
