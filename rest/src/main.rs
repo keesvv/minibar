@@ -1,3 +1,6 @@
+mod routes;
+mod services;
+
 use std::env;
 use std::{io, net::Ipv4Addr};
 
@@ -10,11 +13,9 @@ use minibar_rest::State;
 
 use actix_cors::Cors;
 use actix_web::{
-    web::{delete, get, post, Data},
+    web::{get, post, Data},
     App, HttpServer,
 };
-
-mod routes;
 
 #[actix_web::main]
 async fn main() {
@@ -38,9 +39,7 @@ async fn main() {
                 CookieSessionStore::default(),
                 secret_key.clone(),
             ))
-            .route("/auth", post().to(routes::login))
-            .route("/auth", delete().to(routes::logout))
-            .route("/auth", get().to(routes::get_auth))
+            .configure(services::auth)
             .route("/config", get().to(routes::get_config))
             .route("/beverages", get().to(routes::get_beverages))
             .route("/orders", post().to(routes::order))

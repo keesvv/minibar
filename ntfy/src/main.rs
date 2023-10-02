@@ -1,19 +1,21 @@
 use std::{env, net::Ipv4Addr};
 
-use minibar::webhook::WebhookBody;
+use minibar::webhook::WebhookPayload;
 use minibar_ntfy::OrderFormatter;
 use warp::{self, body::json, path, reply::Reply, Filter};
 
 #[tokio::main]
 async fn main() {
-    let webhook_handler = path!().and(json::<WebhookBody>()).and_then(handle_webhook);
+    let webhook_handler = path!()
+        .and(json::<WebhookPayload>())
+        .and_then(handle_webhook);
 
     warp::serve(webhook_handler)
         .run((Ipv4Addr::LOCALHOST, 1338))
         .await;
 }
 
-async fn handle_webhook(body: WebhookBody) -> Result<impl Reply, warp::Rejection> {
+async fn handle_webhook(body: WebhookPayload) -> Result<impl Reply, warp::Rejection> {
     let topic = env::var("NTFY_TOPIC").ok().expect("missing ntfy topic");
     reqwest::Client::new()
         .post(format!("https://ntfy.sh/{}", topic))

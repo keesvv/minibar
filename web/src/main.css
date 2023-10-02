@@ -12,7 +12,7 @@
   }
 
   .btn {
-    @apply control p-6 md:max-w-xs disabled:opacity-40;
+    @apply control p-6 md:max-w-xs disabled:opacity-50;
   }
 
   .btn-alt {

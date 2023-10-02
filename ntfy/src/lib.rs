@@ -16,7 +16,7 @@ impl<'a> OrderFormatter<'a> {
             OrderItem::Water => "water".into(),
             OrderItem::Unit { beverage_id } => beverage_id.to_owned(),
             OrderItem::Shot { beverage_id } => format!("{} shot", beverage_id),
-            OrderItem::Mix { beverage_ids } => format!("{} mix", beverage_ids.join(", ")),
+            OrderItem::Mix { beverage_ids } => format!("{} mix", beverage_ids.join(" + ")),
         }
     }
 }

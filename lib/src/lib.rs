@@ -1,4 +1,5 @@
 pub mod auth;
+pub mod instance;
 pub mod order;
 pub mod webhook;
 
