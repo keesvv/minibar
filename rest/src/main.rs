@@ -6,7 +6,7 @@ use actix_session::storage::CookieSessionStore;
 use actix_session::SessionMiddleware;
 use actix_web::cookie::Key;
 use minibar::Beverage;
-use minibar_rest::{Config, State};
+use minibar_rest::State;
 
 use actix_cors::Cors;
 use actix_web::{
@@ -22,13 +22,16 @@ async fn main() {
     let beverages: Vec<Beverage> = serde_json::from_reader(io::stdin()).unwrap();
     let secret_key = Key::generate();
 
+    let state = Data::new(State {
+        config: Default::default(),
+        beverages: beverages.clone(),
+        webhook_url: webhook_url.clone(),
+        session_lock: Default::default(),
+    });
+
     HttpServer::new(move || {
         App::new()
-            .app_data(Data::new(State {
-                config: Config::default(),
-                beverages: beverages.clone(),
-                webhook_url: webhook_url.clone(),
-            }))
+            .app_data(state.clone())
             .wrap(Cors::permissive())
             .wrap(IdentityMiddleware::default())
             .wrap(SessionMiddleware::new(

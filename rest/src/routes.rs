@@ -14,12 +14,12 @@ pub struct AuthResponse {
     pub user: String,
 }
 
-pub async fn get_beverages(_: Identity, state: Data<State>) -> impl Responder {
-    Json(state.beverages.clone())
+pub async fn get_config(state: Data<State>) -> impl Responder {
+    Json(state.config.clone())
 }
 
-pub async fn get_config(_: Identity, state: Data<State>) -> impl Responder {
-    Json(state.config.clone())
+pub async fn get_beverages(_: Identity, state: Data<State>) -> impl Responder {
+    Json(state.beverages.clone())
 }
 
 pub async fn get_auth(user: Identity) -> impl Responder {
@@ -28,11 +28,24 @@ pub async fn get_auth(user: Identity) -> impl Responder {
     })
 }
 
-pub async fn login(req: HttpRequest, credentials: Json<Credentials>) -> impl Responder {
-    Identity::login(&req.extensions(), credentials.name.to_owned()).unwrap();
-    HttpResponse::Created().json(AuthResponse {
-        user: credentials.name.to_owned(),
-    })
+pub async fn login(
+    req: HttpRequest,
+    credentials: Json<Credentials>,
+    state: Data<State>,
+) -> impl Responder {
+    let name = credentials.name.to_owned();
+    let mut session_lock = state.session_lock.lock().unwrap();
+
+    if session_lock.contains(&name) {
+        HttpResponse::Conflict().into()
+    } else {
+        session_lock.insert(name.to_owned());
+        Identity::login(&req.extensions(), name.to_owned()).unwrap();
+
+        HttpResponse::Created().json(AuthResponse {
+            user: credentials.name.to_owned(),
+        })
+    }
 }
 
 pub async fn logout(user: Identity) -> impl Responder {

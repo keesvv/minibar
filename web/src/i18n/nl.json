@@ -22,6 +22,10 @@
     "caption": "Mag ik weten wie je bent?",
     "inputs": {
       "firstName": "Voornaam"
+    },
+    "errors": {
+      "locked": "Vraag de eigenaar om je inlog te ontgrendelen.",
+      "locked_owner": "Vraag {owner} om je inlog te ontgrendelen."
     }
   }
 }

@@ -17,9 +17,10 @@
       session.set(await authResponse.json());
     }
 
+    config.set(await api("config").json());
+
     session.subscribe(async (exists) => {
       if (!exists) return navigate("/login");
-      config.set(await api("config").json());
       stock.set(await api("beverages").json());
     });
 

@@ -1,3 +1,6 @@
+use std::collections::HashSet;
+use std::sync::Mutex;
+
 use minibar::Beverage;
 
 use serde::Serialize;
@@ -7,6 +10,7 @@ use uom::si::volume::centiliter;
 #[derive(Debug, Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Config {
+    pub owner: Option<String>,
     pub size: SizeConfig,
     pub max_order_size: i32,
 }
@@ -14,6 +18,7 @@ pub struct Config {
 impl Default for Config {
     fn default() -> Self {
         Self {
+            owner: None,
             size: Default::default(),
             max_order_size: 3,
         }
@@ -34,9 +39,9 @@ impl Default for SizeConfig {
     }
 }
 
-#[derive(Clone, Serialize)]
 pub struct State {
     pub config: Config,
     pub beverages: Vec<Beverage>,
     pub webhook_url: Option<String>,
+    pub session_lock: Mutex<HashSet<String>>,
 }

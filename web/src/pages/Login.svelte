@@ -1,15 +1,20 @@
 <script>
   import { _ } from "svelte-i18n";
-  import { authenticate, session } from "../modules/auth";
   import { navigate } from "svelte-navigator";
   import { onMount } from "svelte";
   import IconContinue from "~icons/line-md/arrow-small-right";
+  import { authenticate, session } from "../modules/auth";
+  import { config } from "../modules/config";
 
   let firstName = "";
   $: canLogin = firstName.length > 0;
 
+  let locked = false;
+
   async function login() {
     const response = await authenticate({ name: firstName });
+    locked = response.status === 409;
+
     if (!response.ok) {
       return;
     }
@@ -38,4 +43,11 @@
       ><IconContinue /></button
     >
   </form>
+  {#if locked}
+    <span class="text-sm text-gray-500">
+      {$_($config.owner ? "login.errors.locked_owner" : "login.errors.locked", {
+        values: { owner: $config.owner },
+      })}
+    </span>
+  {/if}
 </section>
