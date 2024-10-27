@@ -1,11 +1,13 @@
+use crate::schema::*;
 use diesel::prelude::*;
-use minibar::BeverageId;
-use uom::si::f32::Volume;
+use diesel::sqlite::Sqlite;
 
-#[derive(Queryable)]
+#[derive(Queryable, Selectable, Insertable)]
+#[diesel(table_name = beverage)]
+#[diesel(check_for_backend(Sqlite))]
 pub struct Beverage {
-    pub id: BeverageId,
+    pub id: String,
     pub description: String,
-    pub capacity: Volume,
+    pub capacity: f32,
     pub amount: f32,
 }

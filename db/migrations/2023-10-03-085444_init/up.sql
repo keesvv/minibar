@@ -1,14 +1,14 @@
 CREATE TABLE
-    Beverage (
-        id INTEGER NOT NULL PRIMARY KEY,
-        description NOT NULL,
-        capacity NUMERIC NOT NULL,
-        amount NUMERIC NOT NULL
+    beverage (
+        id TEXT NOT NULL PRIMARY KEY,
+        description TEXT NOT NULL,
+        capacity REAL NOT NULL,
+        amount REAL NOT NULL
     );
 
 CREATE TABLE
-    Beverage_Metadata (
-        id INTEGER NOT NULL PRIMARY KEY,
+    beverage_meta (
+        id TEXT NOT NULL PRIMARY KEY,
         category TEXT,
         image_uri TEXT,
         alc_percent NUMERIC,

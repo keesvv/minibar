@@ -1,17 +1,17 @@
 // @generated automatically by Diesel CLI.
 
 diesel::table! {
-    Beverage (id) {
-        id -> Integer,
-        description -> Binary,
-        capacity -> Double,
-        amount -> Double,
+    beverage (id) {
+        id -> Text,
+        description -> Text,
+        capacity -> Float,
+        amount -> Float,
     }
 }
 
 diesel::table! {
-    Beverage_Metadata (id) {
-        id -> Integer,
+    beverage_meta (id) {
+        id -> Text,
         category -> Nullable<Text>,
         image_uri -> Nullable<Text>,
         alc_percent -> Nullable<Double>,
@@ -20,6 +20,6 @@ diesel::table! {
 }
 
 diesel::allow_tables_to_appear_in_same_query!(
-    Beverage,
-    Beverage_Metadata,
+    beverage,
+    beverage_meta,
 );

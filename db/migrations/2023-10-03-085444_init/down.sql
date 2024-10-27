@@ -1,3 +1,3 @@
-DROP TABLE Beverage;
+DROP TABLE beverage;
 
-DROP TABLE Beverage_Metadata;
+DROP TABLE beverage_meta;
